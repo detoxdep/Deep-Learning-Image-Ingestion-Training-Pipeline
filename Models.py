@@ -60,3 +60,14 @@ class ModelB(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+    
+    # Quick test to see if models load
+if __name__ == "__main__":
+    model_a = ModelA()
+    model_b = ModelB()
+    print("Successfully initialized Model A and Model B!")
+    
+    # Create a fake 'image' to test the flow (1 image, 3 channels, 150x150)
+    fake_image = torch.randn(1, 3, 150, 150)
+    output = model_a(fake_image)
+    print(f"Model A Test Output Shape: {output.shape} (Should be [1, 4])")
