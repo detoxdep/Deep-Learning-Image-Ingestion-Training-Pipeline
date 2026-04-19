@@ -1,29 +1,33 @@
 import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+import os
 
-# 1. Define the "Recipe" for the images (Transforms)
+# Transform setup
 data_transforms = transforms.Compose([
-    transforms.Resize((150, 150)),  # Matches your model input
-    transforms.ToTensor(),           # Converts pixels to 0-1 scale
-    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]) # Normalized for RGB
+    transforms.Resize((150, 150)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 ])
 
-# 2. Load the actual images
-# Change 'data/train' to the actual path where the imagenes are saved
-try:
-    train_dataset = datasets.ImageFolder(root='./data/train', transform=data_transforms)
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-    
-    print(f"Success! Found {len(train_dataset)} images.")
-    print(f"Classes detected: {train_dataset.classes}")
-    
-except Exception as e:
-    print(f"Error: Could not find the images. Check your folder path! \n{e}")
+# Define the paths
+data_dir = './data'
+train_dir = os.path.join(data_dir, 'train')
+val_dir = os.path.join(data_dir, 'val')
+test_dir = os.path.join(data_dir, 'test')
 
-# 3. Create the "Loaders" (This feeds images in groups/batches)
-#train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-#val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+# 1. Train Loader
+train_dataset = datasets.ImageFolder(root=train_dir, transform=data_transforms)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 
-#print(f"Detected Classes: {train_dataset.classes}")
-#print(f"Number of training images: {len(train_dataset)}")
+# 2. Val Loader
+val_dataset = datasets.ImageFolder(root=val_dir, transform=data_transforms)
+val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+
+# 3. Test Loader
+test_dataset = datasets.ImageFolder(root=test_dir, transform=data_transforms)
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+
+print(f"DataLoader Ready!")
+print(f"Train: {len(train_dataset)} | Val: {len(val_dataset)} | Test: {len(test_dataset)}")
+print(f"Classes: {train_dataset.classes}")
