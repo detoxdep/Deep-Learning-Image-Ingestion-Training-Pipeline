@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+# Define Model A (Simpler CNN) -- 2 layers (simple shapes: edges colors)
 class ModelA(nn.Module):
     def __init__(self):
         super(ModelA, self).__init__()
@@ -29,6 +30,8 @@ class ModelA(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+    
+# Define Model B (Deeper CNN) -- 3 layers (+ texture, curves) 
 class ModelB(nn.Module):
     def __init__(self):
         super(ModelB, self).__init__()
