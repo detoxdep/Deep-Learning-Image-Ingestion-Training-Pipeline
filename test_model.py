@@ -1,5 +1,5 @@
 import torch
-from Models import ModelA
+from Models import ModelB
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
@@ -17,8 +17,8 @@ test_dataset = datasets.ImageFolder(root='./data/test', transform=data_transform
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 # 3. Load the Saved Brain
-model = ModelA().to(device)
-model.load_state_dict(torch.load('Model_A_weights.pth'))
+model = ModelB().to(device)
+model.load_state_dict(torch.load('Model_B_weights.pth', map_location=device))
 model.eval()
 
 # 4. Run the Test

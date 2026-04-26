@@ -1,10 +1,10 @@
 import torch
-from Models import ModelA
+from Models import ModelB
 from DataLoader import test_loader
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-model = ModelA().to(device)
-model.load_state_dict(torch.load('Model_A_weights.pth'))
+model = ModelB().to(device)
+model.load_state_dict(torch.load('Model_B_weights.pth', map_location=device)) 
 model.eval()
 
 # Tracking variables
