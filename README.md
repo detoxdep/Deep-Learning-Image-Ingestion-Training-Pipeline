@@ -1,6 +1,5 @@
 # ==============================================================================
 # RECYCLABLE WASTE CLASSIFICATION — COMPUTER VISION RESEARCH LAB
-# PROJECT README (SUBMISSION FORMAT: README.txt)
 # Course: CAP 4630 - Introduction to Artificial Intelligence (Spring 2026)
 # University of North Florida — School of Computing
 # ==============================================================================
